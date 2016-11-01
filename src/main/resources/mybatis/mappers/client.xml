@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="client">
+
+
+  <insert id="insert" parameterType="clientvo">
+    <![CDATA[
+      INSERT
+        INTO client
+      VALUES (null, #{firstName}, #{lastName}, #{email}, password(#{password }));
+    ]]>
+    <selectKey keyProperty="id" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+  <select id="selectById" resultType="clientvo" parameterType="int">
+    <![CDATA[
+      SELECT *
+        FROM client
+       WHERE id=#{id }
+
+    ]]>
+  </select>
+
+  <select id="selectByEmail" resultType="clientvo" parameterType="String">
+    <![CDATA[
+      SELECT id AS id,
+             first_name AS firstName,
+             last_name AS lastName,
+             email AS email,
+             password AS password
+        FROM client
+       WHERE email = #{email}
+    ]]>
+  </select>
+
+  <select id="selectByEmailPassword" resultType="clientvo" parameterType="clientvo">
+    <![CDATA[
+      SELECT id AS id,
+             first_name AS firstName,
+             last_name AS lastName,
+             email AS email,
+             password AS password
+        FROM client
+       WHERE email = #{email}
+         AND password = PASSWORD(#{password})
+    ]]>
+  </select>
+
+</mapper>

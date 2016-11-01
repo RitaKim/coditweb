@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <typeAliases>
+    <typeAlias type="com.estsoft.codit.db.vo.ApplicantVo" alias="applicantvo" />
+    <typeAlias type="com.estsoft.codit.db.vo.CartVo" alias="cartvo" />
+    <typeAlias type="com.estsoft.codit.db.vo.ClientVo" alias="clientvo" />
+    <typeAlias type="com.estsoft.codit.db.vo.ProblemInfoVo" alias="probleminfovo" />
+    <typeAlias type="com.estsoft.codit.db.vo.RecruitVo" alias="recruitvo" />
+    <typeAlias type="com.estsoft.codit.db.vo.ResultVo" alias="resultvo" />
+    <typeAlias type="com.estsoft.codit.db.vo.ProblemVo" alias="problemvo" />
+  </typeAliases>
+  <mappers>
+    <mapper resource="mybatis/mappers/applicant.xml" />
+    <mapper resource="mybatis/mappers/cart.xml" />
+    <mapper resource="mybatis/mappers/client.xml" />
+    <mapper resource="mybatis/mappers/probleminfo.xml" />
+    <mapper resource="mybatis/mappers/recruit.xml" />
+    <mapper resource="mybatis/mappers/result.xml" />
+    <mapper resource="mybatis/mappers/problem.xml" />
+  </mappers>
+</configuration>

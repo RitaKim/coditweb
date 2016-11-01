@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="applicant">
+  <select id="selectListByRecruitId" parameterType="int" resultType="applicantvo">
+    <![CDATA[ SELECT id,
+                      name,
+                      email,
+                      ticket,
+                      start_time as startTime,
+                      submit_time as submitTime,
+                      recruit_id as recruitId
+              FROM applicant
+              WHERE recruit_id = #{recruitId}]]>
+  </select>
+
+  <insert id="insert" parameterType="applicantvo">
+    <![CDATA[ INSERT
+              INTO applicant
+              VALUE(NULL,
+                    #{name},
+                    #{email},
+                    password(#{ticket}),
+                    #{startTime},
+                    #{submitTime},
+                    #{recruitId}); ]]>
+    <selectKey keyProperty="id" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+
+  <select id="selectCountByRecruitId" parameterType="int" resultType="int">
+     <![CDATA[ SELECT count(*) as count
+              FROM applicant
+              WHERE recruit_id = #{recruitId}]]>
+  </select>
+
+  <delete id="deleteByRecruitId" parameterType="int">
+    DELETE
+    FROM applicant
+    WHERE recruit_id = #{recruitId}
+  </delete>
+
+  <select id="selectSubmittedCountByRecruitId" parameterType="int" resultType="int">
+    <![CDATA[ SELECT count(*) as count
+              from applicant
+              where recruit_id = #{recruitId} and submit_time is not null]]>
+  </select>
+
+
+</mapper>

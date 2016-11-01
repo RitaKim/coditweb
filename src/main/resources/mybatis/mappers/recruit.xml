@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="recruit">
+
+  <insert id="insert" parameterType="recruitvo">
+    <![CDATA[
+      INSERT
+        INTO recruit
+      VALUES (NULL,
+               #{title},
+               #{fromDate},
+               #{toDate},
+               #{clientId},
+               NULL)
+    ]]>
+    <selectKey keyProperty="id" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+
+
+  <select id="selectByIdClientId" resultType="recruitvo" parameterType="hashmap">
+    <![CDATA[
+      SELECT id        AS id,
+             title     AS title,
+             from_date AS fromDate,
+             to_date   AS toDate,
+             client_id AS clientId,
+             email_format AS emailFormat
+        FROM recruit
+       WHERE id=#{recruitId }
+       AND client_id=#{clientId}
+    ]]>
+  </select>
+
+  <select id="selectListByClientId" resultType="recruitvo" parameterType="int">
+    <![CDATA[
+      SELECT id        AS id,
+             title     AS title,
+             from_date AS fromDate,
+             to_date   AS toDate,
+             client_id AS clientId,
+             email_format AS emailFormat
+        FROM recruit
+        WHERE client_id = #{clientId}
+        ORDER BY id DESC
+    ]]>
+  </select>
+
+  <select id="selectById" resultType="recruitvo" parameterType="int">
+    <![CDATA[
+      SELECT id        AS id,
+             title     AS title,
+             from_date AS fromDate,
+             to_date   AS toDate,
+             client_id AS clientId,
+             email_format AS emailFormat
+        FROM recruit
+       WHERE id=#{id }
+    ]]>
+  </select>
+
+
+  <update id="updateDate" parameterType = "hashmap">
+    <![CDATA[ UPDATE recruit set from_date = #{fromDate}, to_date = #{toDate} WHERE id = #{recruitId} ]]>
+  </update>
+
+  <update id="updateEmailFormat" parameterType = "hashmap">
+    <![CDATA[ UPDATE recruit set email_format = #{emailFormat} WHERE id = #{recruitId} ]]>
+  </update>
+</mapper>
