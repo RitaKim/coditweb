@@ -50,8 +50,9 @@ public class RecruitController {
     RecruitVo recruitVo = recruitService.getRecruitVo(recruitId);
 
     //Invalid access
-    if (recruitVo == null)
+    if (recruitVo == null){
       return "redirect:/";
+    }
 
     //Get server time
     long time = System.currentTimeMillis();
